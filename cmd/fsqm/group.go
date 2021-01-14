@@ -15,12 +15,12 @@ func init() {
 	cmdRoot.AddCommand(cmdGroup)
 }
 
-func lookupGroup(groupIdOrGroupName string) (grp *user.Group, err error) {
-	if isNumeric(groupIdOrGroupName) {
+func lookupGroup(groupIDOrGroupName string) (grp *user.Group, err error) {
+	if isNumeric(groupIDOrGroupName) {
 		grp = &user.Group{
-			Gid: groupIdOrGroupName,
+			Gid: groupIDOrGroupName,
 		}
 		return
 	}
-	return user.LookupGroup(groupIdOrGroupName)
+	return user.LookupGroup(groupIDOrGroupName)
 }

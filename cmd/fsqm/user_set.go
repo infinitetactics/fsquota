@@ -57,7 +57,7 @@ var cmdUserSet = &cobra.Command{
 			return
 		}
 
-		if info, err = fsquota.SetUserQuota(args[0], u, limits); err != nil {
+		if info, err = fsquota.SetUserQuota(args[0], u, &limits); err != nil {
 			return
 		}
 

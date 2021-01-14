@@ -2,13 +2,13 @@ package fsquota
 
 import "fmt"
 
-// Major version
+// VersionMajor is the Major version
 const VersionMajor = 0
 
-// Minor version
+// VersionMinor is the Minor version
 const VersionMinor = 1
 
-// Patch version
+// VersionPatch is the Patch version
 const VersionPatch = 2
 
 // VersionString returns the complete version string

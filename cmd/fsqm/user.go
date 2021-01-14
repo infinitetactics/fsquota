@@ -15,12 +15,12 @@ func init() {
 	cmdRoot.AddCommand(cmdUser)
 }
 
-func lookupUser(userIdOrUsername string) (usr *user.User, err error) {
-	if isNumeric(userIdOrUsername) {
+func lookupUser(userIDOrUsername string) (usr *user.User, err error) {
+	if isNumeric(userIDOrUsername) {
 		usr = &user.User{
-			Uid: userIdOrUsername,
+			Uid: userIDOrUsername,
 		}
 		return
 	}
-	return user.Lookup(userIdOrUsername)
+	return user.Lookup(userIDOrUsername)
 }

@@ -8,7 +8,7 @@ import (
 	"github.com/spf13/cobra"
 )
 
-func lookupUsernameByUid(uid string) string {
+func lookupUsernameByUID(uid string) string {
 	if u, err := user.LookupId(uid); err == nil {
 		return u.Username
 	}
@@ -29,7 +29,7 @@ var cmdUserReport = &cobra.Command{
 			return
 		}
 
-		lookupFn := lookupUsernameByUid
+		lookupFn := lookupUsernameByUID
 
 		if wantNumeric, _ := cmd.Flags().GetBool("numeric"); wantNumeric {
 			lookupFn = noopLookup

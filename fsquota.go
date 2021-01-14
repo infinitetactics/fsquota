@@ -4,8 +4,8 @@ package fsquota
 import "os/user"
 
 // SetUserQuota configures a user's quota
-func SetUserQuota(path string, user *user.User, limits Limits) (info *Info, err error) {
-	return setUserQuota(path, user, &limits)
+func SetUserQuota(path string, user *user.User, limits *Limits) (info *Info, err error) {
+	return setUserQuota(path, user, limits)
 }
 
 // GetUserInfo retrieves a user's quota information
@@ -19,8 +19,8 @@ func GetUserReport(path string) (report *Report, err error) {
 }
 
 // SetGroupQuota configures a group's quota
-func SetGroupQuota(path string, group *user.Group, limits Limits) (info *Info, err error) {
-	return setGroupQuota(path, group, &limits)
+func SetGroupQuota(path string, group *user.Group, limits *Limits) (info *Info, err error) {
+	return setGroupQuota(path, group, limits)
 }
 
 // GetGroupInfo retrieves a group's quota information

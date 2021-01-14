@@ -53,7 +53,7 @@ func TestSetAndGetUserQuota(t *testing.T) {
 	limits.Files.SetHard(5000)              // 5000 files hard limit
 
 	t.Run("QuotasEnabled", func(t *testing.T) {
-		quotaInfo, err := fsquota.SetUserQuota(testMountPointQuotasEnabled, testUser, limits)
+		quotaInfo, err := fsquota.SetUserQuota(testMountPointQuotasEnabled, testUser, &limits)
 		require.NoError(t, err)
 		require.NotNil(t, quotaInfo)
 
@@ -75,7 +75,7 @@ func TestSetAndGetUserQuota(t *testing.T) {
 	})
 
 	t.Run("QuotasDisabled", func(t *testing.T) {
-		quotaInfo, err := fsquota.SetUserQuota(testMountpointQuotasDisabled, testUser, limits)
+		quotaInfo, err := fsquota.SetUserQuota(testMountpointQuotasDisabled, testUser, &limits)
 		assert.Error(t, err)
 		assert.Nil(t, quotaInfo)
 	})
@@ -96,7 +96,7 @@ func TestSetAndGetGroupQuota(t *testing.T) {
 	limits.Files.SetHard(5000)              // 5000 files hard limit
 
 	t.Run("QuotasEnabled", func(t *testing.T) {
-		quotaInfo, err := fsquota.SetGroupQuota(testMountPointQuotasEnabled, testGroup, limits)
+		quotaInfo, err := fsquota.SetGroupQuota(testMountPointQuotasEnabled, testGroup, &limits)
 		require.NoError(t, err)
 
 		assert.EqualValues(t, 10*1024*1024, quotaInfo.Bytes.GetSoft())
@@ -117,7 +117,7 @@ func TestSetAndGetGroupQuota(t *testing.T) {
 	})
 
 	t.Run("QuotasDisabled", func(t *testing.T) {
-		quotaInfo, err := fsquota.SetGroupQuota(testMountpointQuotasDisabled, testGroup, limits)
+		quotaInfo, err := fsquota.SetGroupQuota(testMountpointQuotasDisabled, testGroup, &limits)
 		assert.Error(t, err)
 		assert.Nil(t, quotaInfo)
 	})
@@ -182,7 +182,7 @@ func TestGetUserReport(t *testing.T) {
 			}
 
 			// Configure quota for user
-			quotaInfo, err := fsquota.SetUserQuota(testMountPointQuotasEnabled, testUser, limits)
+			quotaInfo, err := fsquota.SetUserQuota(testMountPointQuotasEnabled, testUser, &limits)
 			require.NoError(t, err, "Failed to set quota for UID %d", uid)
 
 			assert.EqualValues(t, 10*1024*1024, quotaInfo.Bytes.GetSoft())
@@ -277,7 +277,7 @@ func TestGetGroupReport(t *testing.T) {
 			}
 
 			// Configure quota for group
-			quotaInfo, err := fsquota.SetGroupQuota(testMountPointQuotasEnabled, testGroup, limits)
+			quotaInfo, err := fsquota.SetGroupQuota(testMountPointQuotasEnabled, testGroup, &limits)
 			require.NoError(t, err, "Failed to set quota for GID %d", gid)
 
 			assert.EqualValues(t, 10*1024*1024, quotaInfo.Bytes.GetSoft())

@@ -11,7 +11,7 @@ import (
 	"syscall"
 	"unsafe"
 
-	"github.com/docker/docker/pkg/mount"
+	"github.com/moby/sys/mountinfo"
 	"github.com/speijnik/go-errortree"
 	"golang.org/x/sys/unix"
 )
@@ -111,8 +111,8 @@ func pathToDevice(path string) (device string, err error) {
 	devMinor := unix.Minor(statT.Dev)
 
 	// Retrieve mount info
-	var mountInfos []*mount.Info
-	if mountInfos, err = mount.GetMounts(); err != nil {
+	var mountInfos []*mountinfo.Info
+	if mountInfos, err = mountinfo.GetMounts(nil); err != nil {
 		return
 	}
 
@@ -193,7 +193,7 @@ type nextdqblk struct {
 	dqbBTime      uint64
 	dqbITime      uint64
 	dqbValid      uint32
-	dqbId         uint32
+	dqbID         uint32
 }
 
 func (n nextdqblk) toDqblk() *dqblk {
@@ -216,13 +216,13 @@ func getReportByNextQuota(t quotaCtlType, device string) (report *Report, err er
 	}
 
 	// Always start at ID 0
-	nextId := uint32(0)
+	nextID := uint32(0)
 
 	for {
 		nextQuotaInfoStruct := &nextdqblk{}
 
 		// Retrieve per-user quota
-		if err = quotactl(cmdGetNextQuota, t, device, nextId, unsafe.Pointer(nextQuotaInfoStruct)); err != nil {
+		if err = quotactl(cmdGetNextQuota, t, device, nextID, unsafe.Pointer(nextQuotaInfoStruct)); err != nil {
 			if scErr, isSCErr := err.(*os.SyscallError); isSCErr && os.IsNotExist(scErr.Err) {
 				// GetNextQuota will respond ESRCH when no further quotas can be found
 				err = nil
@@ -232,8 +232,8 @@ func getReportByNextQuota(t quotaCtlType, device string) (report *Report, err er
 			break
 		}
 
-		rep.Infos[fmt.Sprint(nextQuotaInfoStruct.dqbId)] = nextQuotaInfoStruct.toDqblk().toInfo()
-		nextId += 1
+		rep.Infos[fmt.Sprint(nextQuotaInfoStruct.dqbID)] = nextQuotaInfoStruct.toDqblk().toInfo()
+		nextID++
 	}
 
 	if err == nil {

@@ -57,7 +57,7 @@ var cmdGroupSet = &cobra.Command{
 			return
 		}
 
-		if info, err = fsquota.SetGroupQuota(args[0], g, limits); err != nil {
+		if info, err = fsquota.SetGroupQuota(args[0], g, &limits); err != nil {
 			return
 		}
 
