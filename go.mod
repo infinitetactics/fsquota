@@ -1,4 +1,4 @@
-module github.com/anexia-it/fsquota
+module github.com/benderdave/fsquota
 
 go 1.15
 

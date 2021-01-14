@@ -21,7 +21,7 @@ archive:
 
 release:
   github:
-    owner: anexia-it
+    owner: benderdave
     name: fsquota
   draft: false
   prerelease: false

@@ -5,7 +5,7 @@ import (
 	"strings"
 	"unicode"
 
-	"github.com/anexia-it/fsquota"
+	"github.com/benderdave/fsquota"
 	"github.com/dustin/go-humanize"
 	"github.com/speijnik/go-errortree"
 	"github.com/spf13/cobra"
