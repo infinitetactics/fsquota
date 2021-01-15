@@ -5,9 +5,9 @@ type Info struct {
 	Limits
 
 	// Byte usage
-	BytesUsed uint64
+	BytesUsed uint64 `json:"bytes_used"`
 	// File usage
-	FilesUsed uint64
+	FilesUsed uint64 `json:"files_used"`
 }
 
 func (i *Info) isEmpty() bool {

@@ -34,5 +34,6 @@ var cmdUserGet = &cobra.Command{
 }
 
 func init() {
+	cmdUserGet.Flags().BoolP("json", "j", false, "output in json format")
 	cmdUser.AddCommand(cmdUserGet)
 }

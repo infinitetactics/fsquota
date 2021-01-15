@@ -1,6 +1,7 @@
 package main
 
 import (
+	"encoding/json"
 	"errors"
 	"strings"
 	"unicode"
@@ -16,6 +17,13 @@ func humanizeInodes(inodes uint64) string {
 }
 
 func printInfo(cmd *cobra.Command, info *fsquota.Info, prefix string) {
+	if f := cmd.Flags().Lookup("json"); f != nil {
+		if f.Value.String() == "true" {
+			s, _ := json.Marshal(info)
+			cmd.Printf(string(s))
+			return
+		}
+	}
 	cmd.Println(prefix + "bytes:")
 	cmd.Printf(prefix+"  - soft: %s\n", humanize.IBytes(info.Bytes.GetSoft()))
 	cmd.Printf(prefix+"  - hard: %s\n", humanize.IBytes(info.Bytes.GetHard()))

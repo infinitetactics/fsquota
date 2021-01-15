@@ -1,14 +1,28 @@
 package fsquota
 
-import "sync"
+import (
+	"encoding/json"
+	"sync"
+)
 
 // Limits contains quota limits
 type Limits struct {
 	// Byte usage limits
-	Bytes Limit
+	Bytes Limit `json:"bytes"`
 
 	// File count limits
-	Files Limit
+	Files Limit `json:"files"`
+}
+
+// MarshalJSON marshals a Limit struct
+func (l *Limit) MarshalJSON() ([]byte, error) {
+	return json.Marshal(&struct {
+		Soft uint64 `json:"soft"`
+		Hard uint64 `json:"hard"`
+	}{
+		Soft: l.GetSoft(),
+		Hard: l.GetHard(),
+	})
 }
 
 // Limit represents a combined hard and soft limit
