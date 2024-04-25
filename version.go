@@ -9,7 +9,7 @@ const VersionMajor = 0
 const VersionMinor = 1
 
 // VersionPatch is the Patch version
-const VersionPatch = 2
+const VersionPatch = 9
 
 // VersionString returns the complete version string
 func VersionString() string {
