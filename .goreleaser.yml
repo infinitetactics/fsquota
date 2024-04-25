@@ -21,7 +21,7 @@ archive:
 
 release:
   github:
-    owner: benderdave
+    owner: infinitetactics
     name: fsquota
   draft: false
   prerelease: false

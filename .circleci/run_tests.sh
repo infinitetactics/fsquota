@@ -6,9 +6,9 @@ export GOROOT=/usr/local/go
 export GOPATH=/tmp/gopath
 export PATH=$PATH:$GOROOT/bin
 
-mkdir -p $GOPATH/src/github.com/benderdave
-cp -r /home/circleci/project/ $GOPATH/src/github.com/benderdave/fsquota
-cd $GOPATH/src/github.com/benderdave/fsquota
+mkdir -p $GOPATH/src/github.com/infinitetactics
+cp -r /home/circleci/project/ $GOPATH/src/github.com/infinitetactics/fsquota
+cd $GOPATH/src/github.com/infinitetactics/fsquota
 
 export TEST_MOUNTPOINT_QUOTAS_ENABLED=/mnt/quota_test
 export TEST_MOUNTPOINT_QUOTAS_DISABLED=/mnt/noquota_test
