@@ -4,7 +4,7 @@ import (
 	"errors"
 	"os/user"
 
-	"github.com/benderdave/fsquota"
+	"github.com/infinitetactics/fsquota"
 	"github.com/speijnik/go-errortree"
 	"github.com/spf13/cobra"
 )

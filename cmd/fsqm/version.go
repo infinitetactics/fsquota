@@ -1,7 +1,7 @@
 package main
 
 import (
-	"github.com/benderdave/fsquota"
+	"github.com/infinitetactics/fsquota"
 	"github.com/spf13/cobra"
 )
 
